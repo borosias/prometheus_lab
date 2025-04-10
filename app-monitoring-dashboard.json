@@ -1,10 +1,45 @@
 {
-  "name": "$name$",
-  "version": "$version$",
-  "description": "$END$",
-  "main": "$main$",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "title": "App Monitoring",
+  "description": "Dashboard for monitoring custom application metrics",
+  "tags": ["prometheus", "monitoring"],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "hideControls": false,
+  "sharedCrosshair": true,
+  "panels": [
+    {
+      "title": "HTTP Requests Total",
+      "type": "graph",
+      "datasource": "prometheus-worker",
+      "targets": [
+        {
+          "expr": "http_requests_total{job=\"custom-app\"}",
+          "legendFormat": "Requests",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "title": "Temperature Celsius",
+      "type": "gauge",
+      "datasource": "prometheus-worker",
+      "targets": [
+        {
+          "expr": "temperature_celsius{job=\"custom-app\"}",
+          "legendFormat": "Temperature",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+    }
+  ],
+  "templating": {
+    "list": []
   },
-  "private": true
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  }
 }
